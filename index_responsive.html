@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stef's Achievements</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1e1e1e; color: #ffffff; text-align: center; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 40px; justify-content: center; padding: 20px; }
+        .game-container { cursor: pointer; text-align: center; }
+        .game-thumbnail { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        .challenges { display: none; padding: 10px; background-color: #333; border-radius: 10px; margin-top: 5px; }
+        .challenges a { color: #00bfff; display: block; text-decoration: none; margin: 5px 0; transition: color 0.3s, text-decoration 0.3s; }
+        .challenges a:hover { color: #ffcc00; text-decoration: underline; }
+        
+        /* Chapter Box Styling */
+        .chapter-box { 
+            background-color: #ffcc00; 
+            color: #1e1e1e; 
+            padding: 3px 8px; 
+            border-radius: 10px; 
+            display: inline-block; 
+            font-weight: bold; 
+            font-size: 0.8em; 
+            margin-top: 5px;
+        }
+
+        /* Game Title Styling with Underline */
+        .game-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-decoration: underline; /* Underline the game titles */
+            text-decoration-color: #ffffff; /* Underline color set to white */
+            text-decoration-thickness: 2px; /* Optional: thickness of the underline */
+        }
+
+        /* Search Bar Styling */
+        .search-bar {
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 1.2em;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            border: 2px solid #ffffff;
+            background-color: #333;
+            color: #ffffff;
+        }
+    
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      summary {
+        font-size: 1rem;
+      }
+
+      .game-thumbnails img {
+        height: 120px;
+      }
+    }
+    </style>
+        
+</head>
+<body>
+    <h1>Stef's Completed Achievements & Challenges</h1>
+    <p class="legend">🏆 = Achievement  &nbsp;|&nbsp; 🥊 = Challenge  &nbsp;|&nbsp; 🏆🥊 = Both. The Achievement is either not related, or semi-related to the challenge in the video</p>
+
+    <!-- Search Bar -->
+    <input type="text" id="search" class="search-bar" onkeyup="filterGames()" placeholder="Search for a game...">
+
+    <div class="game-grid">
+        <div class="game-container" onclick="toggleChallenges('0304')">
+            <div class="game-title">03.04</div>
+            <img src="images/0304.jpg" alt="0304" class="game-thumbnail" loading="lazy">
+            <div id="0304" class="challenges">
+                <a href="https://youtu.be/HWCH_XJdc3E" target="_blank">🏆 Hardcore Difficulty</a>
+                <a href="https://youtu.be/hlC6q1FGd4c" target="_blank">🏆 10,000+ Points in Survival Mode</a>
+            </div>
+        </div>
+        
+        <div class="game-container" onclick="toggleChallenges('123sms')">
+            <div class="game-title">123 Slaughter Me Street 2</div>
+            <img src="images/123sms.jpg" alt="123sms" class="game-thumbnail" loading="lazy">
+            <div id="123sms" class="challenges">
+                <a href="https://youtu.be/RxonN4OWCUw" target="_blank">🏆 Lights Out Mode (Night 10)</a>
+            </div>
+        </div>
+        
+        <div class="game-container" onclick="toggleChallenges('20tilldawn')">
+            <div class="game-title">20 Minutes Till Dawn</div>
+            <img src="images/20mintilldawn.avif" alt="20tilldawn" class="game-thumbnail" loading="lazy">
+            <div id="20tilldawn" class="challenges">
+                <a href="https://youtu.be/i1haMp4LCxY" target="_blank">🏆 "Reckless" Achievement (Use Abby + Grenade Launcher and only use her random fire to attack</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('ailimit')">
+            <div class="game-title">AI Limit</div>
+            <img src="images/ailimit.avif" alt="ailimit" class="game-thumbnail" loading="lazy">
+            <div id="ailimit" class="challenges">
+                <a href="https://youtu.be/U6VYAJV0dGU" target="_blank">🏆 All Boss Fights (NG)</a>
+            </div>
+        </div>
+        
+        <div class="game-container" onclick="toggleChallenges('aitd2024')">
+            <div class="game-title">Alone in the Dark (2024)</div>
+            <img src="images/aitd2024.avif" alt="aitd2024" class="game-thumbnail" loading="lazy">
+            <div id="aitd2024" class="challenges">
+                <a href="https://youtu.be/kmbL4iZI3Y0" target="_blank">🏆🥊 No Heals + 1hr 25min Speedrun</a>
+            </div>
+        </div>
+        
+        <div class="game-container" onclick="toggleChallenges('anothercrabtreasure')">
+            <div class="game-title">Another Crab's Treasure</div>
+            <img src="images/anothercrabstreasure.avif" alt="anothercrabtreasure" class="game-thumbnail" loading="lazy">
+            <div id="anothercrabtreasure" class="challenges">
+                <a href="https://youtu.be/kSFtIaF_Duc" target="_blank">🏆 All Boss Fights (NG)</a>
+            </div>
+        </div>
+        
+        <div class="game-container" onclick="toggleChallenges('araha')">
+            <div class="game-title">Araha: Curse of Yieun Island</div>
+            <img src="images/araha.jpg" alt="araha" class="game-thumbnail" loading="lazy">
+            <div id="araha" class="challenges">
+                <a href="https://youtu.be/pE_9TUWEHEA" target="_blank">🏆 Very Hard Difficulty</a>
+            </div>
+        </div>
+        
+        <div class="game-container" onclick="toggleChallenges('battleblock')">
+            <div class="game-title">BattleBlock Theater</div>
+            <img src="images/battleblock.jpg" alt="battleblock" class="game-thumbnail" loading="lazy">
+            <div id="battleblock" class="challenges">
+                <a href="#" target="_blank">🏆 Solo Insane Mode <span class="chapter-box">8/8 Chapters</span></a>
+                <a href="#" target="_blank">🏆 Co-op Insane Mode <span class="chapter-box">8/8 Chapters</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('bearhaven')">
+            <div class="game-title">Bear Haven Nights</div>
+            <img src="images/bearhaven.avif" alt="bearhaven" class="game-thumbnail" loading="lazy">
+            <div id="bearhaven" class="challenges">
+                <a href="https://youtu.be/HGNVukUcPEk" target="_blank">🏆 Nights 1-7</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('bloodhounddemo')">
+            <div class="game-title">Bloodhound: First Day in Hell</div>
+            <img src="images/bloodhounddemo.jpg" alt="bloodhounddemo" class="game-thumbnail" loading="lazy">
+            <div id="bloodhounddemo" class="challenges">
+                <a href="https://youtu.be/6C0-NRxBtpY" target="_blank">🏆 Hard Difficulty</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('blackops6')">
+            <div class="game-title">Call of Duty: Black Ops 6</div>
+            <img src="images/blackops6.jpg" alt="blackops6" class="game-thumbnail" loading="lazy">
+            <div id="blackops6" class="challenges">
+                <a href="https://youtu.be/9eFugjoFTic" target="_blank">🏆🥊 Liberty Falls Main Quest (Solo)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('mw3new')">
+            <div class="game-title">Call of Duty: Modern Warfare III (2023)</div>
+            <img src="images/mw3new.jpg" alt="mw3new" class="game-thumbnail" loading="lazy">
+            <div id="mw3new" class="challenges">
+                <a href="https://youtu.be/mgLL3g8Pvcs" target="_blank">🏆 Deep Cover 90 Sec. Speedrun</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('castlecrashers')">
+            <div class="game-title">Castle Crashers</div>
+            <img src="images/castlecrashers.avif" alt="castlecrashers" class="game-thumbnail" loading="lazy">
+            <div id="castlecrashers" class="challenges">
+                <a href="https://youtu.be/lwbF-irdCbE" target="_blank">🏆 2:30 in Stay Back Barbarian Mode</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('crowcountry')">
+            <div class="game-title">Crow Country</div>
+            <img src="images/crowcountry.avif" alt="crowcountry" class="game-thumbnail" loading="lazy">
+            <div id="crowcountry" class="challenges">
+                <a href="https://youtu.be/PjP3qhfHprc" target="_blank">🏆🥊 S Rank (All 15 secrets, all 4 optional bosses, no bonus weapons)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('deadbeacon')">
+            <div class="game-title">Dead Beacon</div>
+            <img src="images/deadbeacon.jpg" alt="deadbeacon" class="game-thumbnail" loading="lazy">
+            <div id="deadbeacon" class="challenges">
+                <a href="https://youtu.be/Bqna7b-20zg" target="_blank">🏆 200+ Points in the Shooting Gallery</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('deadshot')">
+            <div class="game-title">Deadshot</div>
+            <img src="images/deadshot.jpg" alt="deadshot" class="game-thumbnail" loading="lazy">
+            <div id="deadshot" class="challenges">
+                <a href="https://youtu.be/lOqdcmirAoQ" target="_blank">🏆 Full Demo Playthrough (Apocalypse Difficulty)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('deadspace2008')">
+            <div class="game-title">Dead Space (2008)</div>
+            <img src="images/deadspace2008.jpg" alt="deadspace2008" class="game-thumbnail" loading="lazy">
+            <div id="deadspace2008" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIRMACBHBpiyG_y5XUk6bBZ4" target="_blank">🏆 Impossible Difficulty <span class="chapter-box">12/12 Chapters</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('deeprock')">
+            <div class="game-title">Deep Rock Galactic</div>
+            <img src="images/deeprock.jpg" alt="deeprock" class="game-thumbnail" loading="lazy">
+            <div id="deeprock" class="challenges">
+                <a href="https://youtu.be/vrOjHeZRoSA" target="_blank">🏆 Hazard 5 (No Downs, No Resupplies)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('dementium2')">
+            <div class="game-title">Dementium II HD</div>
+            <img src="images/dementium2.jpg" alt="dementium2" class="game-thumbnail" loading="lazy">
+            <div id="dementium2" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIRdmj-JpS2RE1AVkKQPVPON" target="_blank">🏆 Hard Difficulty <span class="chapter-box">5/5 Chapters</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('doom3')">
+            <div class="game-title">Doom 3: BFG Edition</div>
+            <img src="images/doom3.avif" alt="doom3" class="game-thumbnail" loading="lazy">
+            <div id="doom3" class="challenges">
+                <a href="#" target="_blank">🏆 Nightmare Difficulty <span class="chapter-box">27/27 Chapters</span></a>
+                <a href="#" target="_blank">🏆 Lost Mission (Nightmare Difficulty) <span class="chapter-box">8/8 Chapters</span></a>
+                <a href="#" target="_blank">🏆 Resurrection of Evil (Nightmare Difficulty) <span class="chapter-box">12/12 Chapters</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('drmilo')">
+            <div class="game-title">Dr. Milo's Revenge</div>
+            <img src="images/drmilo.jpg" alt="drmilo" class="game-thumbnail" loading="lazy">
+            <div id="drmilo" class="challenges">
+                <a href="https://youtu.be/7bgw4m5KqD4" target="_blank">🏆 11 Min. Speedrun</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('fearthespotlight')">
+            <div class="game-title">Fear the Spotlight</div>
+            <img src="images/fearthespotlight.avif" alt="fearthespotlight" class="game-thumbnail" loading="lazy">
+            <div id="fearthespotlight" class="challenges">
+                <a href="https://youtu.be/iL7vnVQ9u_U" target="_blank">🏆 No Damage + All Collectibles</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('fnaflaps')">
+            <div class="game-title">Five Laps at Freddy's</div>
+            <img src="images/fnaflaps.jpg" alt="fnaflaps" class="game-thumbnail" loading="lazy">
+            <div id="fnaflaps" class="challenges">
+                <a href="https://youtu.be/F-I_K3LU75s" target="_blank">🥊 1st Place in all Races (Demo)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('fnafhw2')">
+            <div class="game-title">Five Nights at Freddy's: Help Wanted 2</div>
+            <img src="images/fnafhw2.jpg" alt="fnafhw2" class="game-thumbnail" loading="lazy">
+            <div id="fnafhw2" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JISW3LZ3xzu9Z4OXO7SUBcCr" target="_blank">🏆 All Mini-Games (Flat Mode) <span class="chapter-box">7/7 Categories</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('fnafpit')">
+            <div class="game-title">Five Nights at Freddy's: Into the Pit</div>
+            <img src="images/fnafpit.avif" alt="fnafpit" class="game-thumbnail" loading="lazy">
+            <div id="fnafpit" class="challenges">
+                <a href="https://youtu.be/lOCNICk_TFA" target="_blank">🏆🥊 3-Star Ending (Nightmare Difficulty, No Flashlight, Deathless)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('gex64')">
+            <div class="game-title">Gex 64: Enter the Gecko</div>
+            <img src="images/gex64.jpg" alt="gex64" class="game-thumbnail" loading="lazy">
+            <div id="gex64" class="challenges">
+                <a href="https://youtu.be/rQmgLre-678" target="_blank">🏆 All Bosses (No Damage)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('gtav')">
+            <div class="game-title">Grand Theft Auto V</div>
+            <img src="images/gtav.jpg" alt="gtav" class="game-thumbnail" loading="lazy">
+            <div id="gtav" class="challenges">
+                <a href="#" target="_blank">🥊 Criminal Mastermind I Challenge <span class="chapter-box">3/26 Missions (23 PB)</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('grounded')">
+            <div class="game-title">Grounded</div>
+            <img src="images/grounded.avif" alt="grounded" class="game-thumbnail" loading="lazy">
+            <div id="grounded" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIT5ofwLg4EcPdYp56IILW3i" target="_blank">🏆 All End-Game Bosses <span class="chapter-box">5/5 Bosses</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('gunfirereborn')">
+            <div class="game-title">Gunfire Reborn</div>
+            <img src="images/gunfirereborn.jpg" alt="gunfirereborn" class="game-thumbnail" loading="lazy">
+            <div id="gunfirereborn" class="challenges">
+                <a href="https://youtu.be/xuSQIz_Q3Jo" target="_blank">🏆 Nightmare Difficulty 30 Min. Speedrun</a>
+                <a href="https://youtu.be/NFQQbiXaPUE" target="_blank">🏆 Endless Difficulty ("Back-to-Back" Achievement)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('gylt')">
+            <div class="game-title">GYLT</div>
+            <img src="images/gylt.jpg" alt="gylt" class="game-thumbnail" loading="lazy">
+            <div id="gylt" class="challenges">
+                <a href="https://youtu.be/RBaSbRxAoZs" target="_blank">🏆 Full Pacifist Playthrough</a>
+                <a href="https://youtu.be/0quv5OQC03o" target="_blank">🏆 Violence Boss Fight (No Damage)</a>
+                <a href="https://youtu.be/MacyYt8cDd0" target="_blank">🏆 Exposure Boss Fight (No Damage)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('hollowcocoon')">
+            <div class="game-title">Hollow Cocoon</div>
+            <img src="images/hollowcocoon.jpg" alt="hollowcocoon" class="game-thumbnail" loading="lazy">
+            <div id="hollowcocoon" class="challenges">
+                <a href="https://youtu.be/DaebRN_O9bM" target="_blank">🏆 Final Boss (Nightmare Difficulty)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('ikai')">
+            <div class="game-title">Ikai</div>
+            <img src="images/ikai.jpg" alt="ikai" class="game-thumbnail" loading="lazy">
+            <div id="ikai" class="challenges">
+                <a href="https://youtu.be/D5IZyGZYUlQ" target="_blank">🏆 All Achievements Playthrough</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('kannagiusagi')">
+            <div class="game-title">Kannagi Usagi</div>
+            <img src="images/kannagiusagi.jpg" alt="kannagiusagi" class="game-thumbnail" loading="lazy">
+            <div id="kannagiusagi" class="challenges">
+                <a href="https://youtu.be/PaAxqwX2zEE" target="_blank">🏆 All Boss Fights</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('kf2')">
+            <div class="game-title">Killing Floor 2</div>
+            <img src="images/kf2.jpg" alt="kf2" class="game-thumbnail" loading="lazy">
+            <div id="kf2" class="challenges">
+                <a href="https://youtu.be/Ubzq89dTcmA" target="_blank">🏆 Castle Volter (Hell on Earth Difficulty / Solo)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('kz1')">
+            <div class="game-title">Killzone</div>
+            <img src="images/kz1.jpg" alt="kz1" class="game-thumbnail" loading="lazy">
+            <div id="kz1" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JISmty645fMFRPnqjUR_rQ9P" target="_blank">🏆 Hard Difficulty <span class="chapter-box">11/11 Chapters</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('lunchlady')">
+            <div class="game-title">Lunch Lady</div>
+            <img src="images/lunchlady.jpg" alt="lunchlady" class="game-thumbnail" loading="lazy">
+            <div id="lunchlady" class="challenges">
+                <a href="https://youtu.be/bkTwhGlkiao" target="_blank">🏆 Insane Difficulty (Solo)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('malum')">
+            <div class="game-title">Malum</div>
+            <img src="images/malum.jpg" alt="malum" class="game-thumbnail" loading="lazy">
+            <div id="malum" class="challenges">
+                <a href="https://youtu.be/7B7cQ9UYMUk" target="_blank">🏆 The Magoroku Challenge (All maps back to back on Insane difficulty, with no resets/deaths)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('muppetmonster')">
+            <div class="game-title">Muppet Monster Adventure</div>
+            <img src="images/muppetmonster.jpg" alt="muppetmonster" class="game-thumbnail" loading="lazy">
+            <div id="muppetmonster" class="challenges">
+                <a href="https://youtu.be/743WOizzUjo" target="_blank">🏆 All Boss Fights (No Damage)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('myfriendlyneighborhood')">
+            <div class="game-title">My Friendly Neighborhood</div>
+            <img src="images/myfriendlyneighborhood.jpg" alt="myfriendlyneighborhood" class="game-thumbnail" loading="lazy">
+            <div id="myfriendlyneighborhood" class="challenges">
+                <a href="https://youtu.be/354XnWAL8hE" target="_blank">🏆🥊 Unfriendly Difficulty (S+ Rank / No Cheats / NG)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('mypopgoes')">
+            <div class="game-title">MyPOPGOES</div>
+            <img src="images/mypopgoes.jpg" alt="mypopgoes" class="game-thumbnail" loading="lazy">
+            <div id="mypopgoes" class="challenges">
+                <a href="https://youtu.be/a-Sqy468fbc" target="_blank">🏆 Days 1-5 (Normal Ending) (Pre-Patch)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('ngs2')">
+            <div class="game-title">Ninja Gaiden Σ2</div>
+            <img src="images/ngs2.jpg" alt="ngs2" class="game-thumbnail" loading="lazy">
+            <div id="ngs2" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JITjEVGTyKCFjzlLzkHlxxwY" target="_blank">🏆 Master Ninja Difficulty <span class="chapter-box">17/17 Chapters</span></a>
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIQsWps8roVu772oLlWYGFAj" target="_blank">🏆 Tag Missions <span class="chapter-box">Mentor, Ultimate Ninja + Master Ninja Missions</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('payday3')">
+            <div class="game-title">Payday 3</div>
+            <img src="images/payday3.jpg" alt="payday3" class="game-thumbnail" loading="lazy">
+            <div id="payday3" class="challenges">
+                <a href="https://youtu.be/zMAtqAH5EEU" target="_blank">🥊 Dirty Ice (Overkill Difficulty / Solo / Stealth)</a>
+                <a href="https://youtu.be/hHfmaKDnj2s" target="_blank">🥊 No Rest For The Wicked (Overkill Difficulty / Solo / Stealth / All Loot)</a>
+                <a href="https://youtu.be/gfx-7UZS-_w" target="_blank">🏆🥊 Rock the Cradle (Overkill Difficulty / Solo / Stealth)</a>
+                <a href="https://youtu.be/Pvsr8bA-aeA" target="_blank">🏆 Dirty Ice 2 Min. Speedrun</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('powerwashsim')">
+            <div class="game-title">Powerwash Simulator</div>
+            <img src="images/powerwashsim.avif" alt="powerwashsim" class="game-thumbnail" loading="lazy">
+            <div id="powerwashsim" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JISy5xg5nTrBwxZNpzAmS5Kx" target="_blank">🏆 5 Gold Medals in Challenge Maps <span class="chapter-box">5/5 Maps</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('re7')">
+            <div class="game-title">Resident Evil 7</div>
+            <img src="images/re7.jpg" alt="re7" class="game-thumbnail" loading="lazy">
+            <div id="re7" class="challenges">
+                <a href="https://youtu.be/-d1XfucP99s" target="_blank">🏆 Ethan Must Die</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('triad2013')">
+            <div class="game-title">Rise of the Triad (2013)</div>
+            <img src="images/triad2013.jpg" alt="triad2013" class="game-thumbnail" loading="lazy">
+            <div id="triad2013" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIROAjnfOUQ1c_o2FeFVFAcu" target="_blank">🏆 Ludicrous Difficulty <span class="chapter-box">4/4 Episodes</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('scoobycyber')">
+            <div class="game-title">Scooby-Doo and the Cyber Chase</div>
+            <img src="images/scoobycyber.avif" alt="scoobycyber" class="game-thumbnail" loading="lazy">
+            <div id="scoobycyber" class="challenges">
+                <a href="https://youtu.be/Y4D4u7Mym5s" target="_blank">🏆 Arctic Circle 2 (All Scooby Snacks)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('shadowwarrior2013')">
+            <div class="game-title">Shadow Warrior</div>
+            <img src="images/shadowwarrior2013.jpg" alt="shadowwarrior2013" class="game-thumbnail" loading="lazy">
+            <div id="shadowwarrior2013" class="challenges">
+                <a href="https://youtu.be/Y4D4u7Mym5s" target="_blank">🏆 Heroic Mode <span class="chapter-box">17/17 Chapters</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('shadowwarrior1997')">
+            <div class="game-title">Shadow Warrior Classic Redux</div>
+            <img src="images/shadowwarrior1997.jpg" alt="shadowwarrior1997" class="game-thumbnail" loading="lazy">
+            <div id="shadowwarrior1997" class="challenges">
+                <a href="https://youtu.be/QikY8oDO2H0" target="_blank">🏆 "Speed Run" Achievement (Beat any developer time)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('shelleymanor')">
+            <div class="game-title">Shelley Manor</div>
+            <img src="images/shelleymanor.jpg" alt="shelleymanor" class="game-thumbnail" loading="lazy">
+            <div id="shelleymanor" class="challenges">
+                <a href="https://youtu.be/eT8XOOP1FcE" target="_blank">🏆 All Achievements Playthrough</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('shdownpour')">
+            <div class="game-title">Silent Hill Downpour</div>
+            <img src="images/shdownpour.jpg" alt="shdownpour" class="game-thumbnail" loading="lazy">
+            <div id="shdownpour" class="challenges">
+                <a href="https://youtu.be/g_TmbpfV8xM" target="_blank">🏆 Pacifist Playthrough</a>
+                <a href="https://youtu.be/aNqUk9Iwuhs" target="_blank">🏆 HARD Combat / HARD Puzzle Difficulty</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('shorigins')">
+            <div class="game-title">Silent Hill: Origins</div>
+            <img src="images/shorigins.jpg" alt="shorigins" class="game-thumbnail" loading="lazy">
+            <div id="shorigins" class="challenges">
+                <a href="https://youtu.be/DZ5VCyK_j-0" target="_blank">🏆 57 Min. Speedrun (No Tracksuit, No Saves, No Map)</a>
+                <a href="https://youtu.be/vsPjLeecMtI" target="_blank">🏆 All Bosses (No Damage)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('strangebrig')">
+            <div class="game-title">Strange Brigade</div>
+            <img src="images/strangebrig.avif" alt="strangebrig" class="game-thumbnail" loading="lazy">
+            <div id="strangebrig" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIQBl1i-jWYliqRgMyOGYhEv" target="_blank">🏆 Main Campaign (Extreme Difficulty, Solo) <span class="chapter-box">9/9 Missions</span></a>
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIQBl1i-jWYliqRgMyOGYhEv" target="_blank">🏆 The Thrice Damned (Extreme Difficulty, Solo) <span class="chapter-box">3/3 Missions</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('tailsofiron')">
+            <div class="game-title">Tails of Iron</div>
+            <img src="images/tailsofiron.jpg" alt="tailsofiron" class="game-thumbnail" loading="lazy">
+            <div id="tailsofiron" class="challenges">
+                <a href="https://youtu.be/ArrSBOruHdY" target="_blank">🏆🥊 All Bosses (Bloody Whisker Mode)</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('pengheist')">
+            <div class="game-title">The Greatest Penguin Heist of All Time</div>
+            <img src="images/pengheist.jpg" alt="pengheist" class="game-thumbnail" loading="lazy">
+            <div id="pengheist" class="challenges">
+                <a href="https://youtu.be/FCxYsgfG7nw" target="_blank">🏆 Research Station 35 Sec. Speedrun</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('tjoc')">
+            <div class="game-title">The Joy of Creation</div>
+            <img src="images/tjoc.jpg" alt="tjoc" class="game-thumbnail" loading="lazy">
+            <div id="tjoc" class="challenges">
+                <a href="https://youtu.be/Gpy8ZeSXSeQ" target="_blank">🏆 Full Demo Playthrough</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('thenameless')">
+            <div class="game-title">The Nameless</div>
+            <img src="images/thenameless.jpg" alt="thenameless" class="game-thumbnail" loading="lazy">
+            <div id="thenameless" class="challenges">
+                <a href="https://youtu.be/PVn-4c5S3p4" target="_blank">🏆 All Achievements Playthrough</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('obscuraexp')">
+            <div class="game-title">The Obscura Experiment</div>
+            <img src="images/obscuraexp.jpg" alt="obscuraexp" class="game-thumbnail" loading="lazy">
+            <div id="obscuraexp" class="challenges">
+                <a href="https://youtu.be/9cCB2pIg6ic" target="_blank">🏆 Dark Matter Difficulty + All Collectibles</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('thing2002')">
+            <div class="game-title">The Thing (2002)</div>
+            <img src="images/thing2002.jpg" alt="thing2002" class="game-thumbnail" loading="lazy">
+            <div id="thing2002" class="challenges">
+                <a href="#" target="_blank">🏆 Hard Difficulty</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('titanfall2')">
+            <div class="game-title">Titanfall 2</div>
+            <img src="images/titanfall2.avif" alt="titanfall2" class="game-thumbnail" loading="lazy">
+            <div id="titanfall2" class="challenges">
+                <a href="https://youtu.be/Ox9XVXWfUbg" target="_blank">🏆 "...Becomes the Master" (Top 3 on the practice range leaderboard)</a>
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JITliV0DKIFxKGAZUeXFn2CT" target="_blank">🏆 Master Difficulty <span class="chapter-box">8/8 Missions</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('tombraider2013')">
+            <div class="game-title">Tomb Raider (2013)</div>
+            <img src="images/tombraider2013.jpg" alt="tombraider2013" class="game-thumbnail" loading="lazy">
+            <div id="tombraider2013" class="challenges">
+                <a href="https://youtu.be/qwyLU_gXqDs" target="_blank">🏆 MP Level 60 + Shopaholic Achievements</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('unforgivinghymn')">
+            <div class="game-title">Unforgiving: A Northern Hymn</div>
+            <img src="images/unforgivinghymn.jpg" alt="unforgivinghymn" class="game-thumbnail" loading="lazy">
+            <div id="unforgivinghymn" class="challenges">
+                <a href="https://youtu.be/0yfBVmTk9F4" target="_blank">🏆 No Death Playthrough</a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('wanteddead')">
+            <div class="game-title">Wanted: Dead</div>
+            <img src="images/wanteddead.jpg" alt="wanteddead" class="game-thumbnail" loading="lazy">
+            <div id="wanteddead" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JISm9Sp3uetCpORMR78yUAKY" target="_blank">🏆 Japanese Hard Mode (Pre-Patch) <span class="chapter-box">5/5 Chapters</span></a>
+                <a href="https://youtu.be/0unqga7ZSas" target="_blank">🏆 Ramen World Legend (Pre-Patch) <span class="chapter-box">5/5 Chapters</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('whiteday2')">
+            <div class="game-title">White Day 2: The Flower That Tells Lies</div>
+            <img src="images/whiteday2.jpg" alt="whiteday2" class="game-thumbnail" loading="lazy">
+            <div id="whiteday2" class="challenges">
+                <a href="#" target="_blank">🏆🥊 Hard Difficulty <span class="chapter-box">3/3 Stories</span></a>
+            </div>
+        </div>
+
+        <div class="game-container" onclick="toggleChallenges('wolfoldblood')">
+            <div class="game-title">Wolfenstein: The Old Blood</div>
+            <img src="images/wolfoldblood.jpg" alt="wolfoldblood" class="game-thumbnail" loading="lazy">
+            <div id="wolfoldblood" class="challenges">
+                <a href="https://www.youtube.com/playlist?list=PL378Brck2JIRTgBsodtbO0hOO7nWBEor1" target="_blank">🏆🥊 Challenge Maps (Ubergold Rating) <span class="chapter-box">10/10 Maps</span></a>
+            </div>
+        </div>
+        <!-- More games can be added here in the same format -->
+    </div>
+
+    <script>
+        // Toggle challenges visibility
+        function toggleChallenges(gameId) {
+            var challenges = document.getElementById(gameId);
+            if (challenges.style.display === "block") {
+                challenges.style.display = "none";
+            } else {
+                challenges.style.display = "block";
+            }
+        }
+
+        // Filter games based on search input
+        function filterGames() {
+            var input = document.getElementById('search');
+            var filter = input.value.toLowerCase();
+            var gameContainers = document.getElementsByClassName('game-container');
+
+            for (var i = 0; i < gameContainers.length; i++) {
+                var gameTitle = gameContainers[i].getElementsByClassName('game-title')[0];
+                if (gameTitle) {
+                    var titleText = gameTitle.textContent || gameTitle.innerText;
+                    if (titleText.toLowerCase().indexOf(filter) > -1) {
+                        gameContainers[i].style.display = "";
+                    } else {
+                        gameContainers[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
